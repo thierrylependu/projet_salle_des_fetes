@@ -1,0 +1,13 @@
+<h2>Message de <?= $message["name"] ?> le <?= $message["date"] ?></h2>
+<p class="container pt-2 bg-secondary">
+<a href="delete_message.php?id=<?= $message['id'] ?>">Supprimer le message</a> <a href="unread_message.php?id=<?= $message['id'] ?>">Marquer non lu</a>
+<br>
+<?= $message["text"] ?>
+<br>
+<strong>Contact:</strong>
+<br>
+Email: <?= $message["email"] ?>
+<?php if(!is_null($message["phone"])){ ?>
+<br>
+Téléphone : <?= $message["phone"] ?>
+<?php } ?></p>

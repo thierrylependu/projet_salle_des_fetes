@@ -1,0 +1,54 @@
+<h2><i class="fas fa-history"></i> Historique des réservations</h2>
+
+<h3>Il y a un total de <?= count($reserv) ?> réservations</h3>
+
+
+<table class="table">
+    <thead>
+        <tr class="table-light">
+            <th>Date</th>
+            <th>Heure</th>
+            <th>Statut</th>
+            <th>Commentaire</th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php foreach($reserv as $res){ 
+            $color = getSatusColor($res["status"]);
+            ?>
+            <tr class="table-hover <?= $color ?>">
+                <td><?= $res["date"] ?></td>
+                <td><?= $res["Heure"] ?></td>
+                <td><?= $res["status"] ?></td>
+                <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#comment<?= $res['id'] ?>"><i class="far fa-comment"></i></button></td>
+            </tr>
+        <?php } ?>
+     </tbody>
+</table>
+
+<?php foreach($reserv as $res){ ?>
+    <div class="modal fade" id="comment<?= $res['id'] ?>">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">Commentaire</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <form action="mes_reservations.php#navbar" method="POST">
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <textarea name="comment" cols="50" rows="10"><?= $res["userComment"] ?></textarea>
+                    <input type="hidden" name="id" value="<?= $res['id'] ?>">
+                </div>
+
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Enregistrer</button>
+                </div>
+             </form>
+            </div>
+        </div>
+    </div>
+<?php } ?>

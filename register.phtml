@@ -1,0 +1,66 @@
+<h1>S'inscrire</h1>
+
+
+<?php if(!empty($_GET)){ ?>
+    <?php if($_GET["error"] === "mail"){ ?>
+        <div class="alert alert-danger alert-dismissible fade show">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            <p>Cette adresse email est déjà enregistrée sur ce site</p>
+        </div>
+    <?php }elseif($_GET["error"] === "name"){ ?>
+        <div class="alert alert-danger alert-dismissible fade show">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            <p>Ce pseudonyme est déjà utilisé sur ce site</p>
+        </div>
+    <?php } ?>
+<?php } ?>
+
+<div class="card bg-info text-white inscription-detail">
+    <div class="card-body">En vous inscrivant, vos réservations seront plus simple à réaliser et à suivre. De plus, vous posséderez un historique de vos réservations passez et serez prioritaires pour les places lors d'évenements.</div>
+</div>
+
+<small>Les champs marqués d'une * doivent être remplis pour l'enregistrement.</small>
+
+<form action="register.php" method="POST" class="register-form">
+
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+            <span class="input-group-text">Identité</span>
+        </div>
+        <input type="text" class="form-control" placeholder="Nom*" name="lastName" required>
+        <input type="text" class="form-control" placeholder="Prénom" name="firstName">
+        <input type="date" class="form-control" placeholder="Date de naissance" name="birthday" value="2020-01-01" required>
+    </div>
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+            <span class="input-group-text">Contact</span>
+        </div>
+        <input type="email" class="form-control" placeholder="Adresse email*" name="mailAdress" required>
+        <input type="text" class="form-control" placeholder="Téléphone" name="phone">
+        <input type="text" class="form-control" placeholder="Portable" name="mobile">
+    </div>
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+            <span class="input-group-text">Adresse</span>
+        </div>
+        <input type="text" class="form-control" placeholder="Adresse" name="address">
+        <input type="text" class="form-control" placeholder="Ville" name="city">
+        <input type="text" class="form-control" placeholder="Pays" name="country" value="Françe">
+    </div>
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+            <span class="input-group-text">Identifiants</span>
+        </div>
+        <input type="text" class="form-control" placeholder="Pseudonyme*" name="userName" required>
+        <input type="password" class="form-control" placeholder="Mot de passe*" name="password" required>
+        <select name="type" class="form-control">
+            <option value="particulier">Particulier</option>
+            <option value="entreprise">Entreprise</option>
+            <option value="association">Association</option>
+            <option value="autre">Autre</option>
+        </select>
+    </div>
+
+    <button type="submit" class="btn btn-primary inscription-btn">S'enregistrer</button>
+
+</form>

@@ -1,0 +1,75 @@
+<?php if($mailSend){ ?>
+    <div class="alert alert-success alert-dismissible fade show">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        Message envoyé !
+    </div>
+<?php } ?>
+
+<h2>Comment nous contacter :</h2>
+
+<section class="contact">
+    <article>
+        <i class="far fa-envelope"></i>
+        <p><a href="https://maps.google.com/?q=3 Place de la Mairie, 92350 Le Plessis-Robinson" target="_blank">Service des fêtes <br>3 Place de la Mairie <br>92350 Le Plessis-Robinson</a></p>
+    </article>
+    <article>
+        <i class="fas fa-phone"></i>
+        <p>
+            <a href="tel:0123456789">0123456789</a>
+            <br>
+            <a href="tel:0698754321">0698754321</a>
+        </p>
+    </article><article>
+        <i class="fas fa-at"></i>
+        <p><a href = "mailto: lienMail@gmail.com">lienMail@gmail.com</a></p>
+    </article>
+
+</section>
+
+<hr>
+
+<section>
+    <h2>Nous suivre: </h2>
+    <div class="follow">
+        <a href="https://fr-fr.facebook.com/leplessisrobinson/" target="_blank"><i class="fab fa-facebook-square"></i></a>
+        <a href="https://twitter.com/plessisrobinson" target="_blank"><i class="fab fa-twitter-square"></i></a>
+    </div>
+</section>
+
+<hr>
+
+<section>
+    <h2>Nous laisser un message :</h2>
+    <form action="contact.php#navbar" method="POST" class="form-contact">
+        <div>
+            <div class="form-group">
+                <label for="name">Nom ou Pseudonyme si inscrit</label>
+                <input name="name" type="text" class="form-control" required <?php if(array_key_exists("role", $_SESSION)){ ?> value="<?= $_SESSION['userName'] ?>"  <?php } ?>>
+            </div>
+            <div class="form-group">
+                <label for="email">Adresse email</label>
+                <input name="email" type="text" class="form-control" required <?php if(array_key_exists("role", $_SESSION)){ $mail = getEmail($_SESSION["id"])?> value="<?= $mail ?>"  <?php } ?>>
+            </div>
+            <div class="form-group">
+                <label for="phone">Téléphone</label>
+                <input name="phone" type="text" class="form-control" <?php if(array_key_exists("role", $_SESSION)){ $phone = getPhone($_SESSION["id"])?> value="<?= $phone ?>"  <?php } ?>>
+            </div>
+            <div class="form-group">
+                <label for="type">Type de message</label>
+                <select name="type" class="custom-select">
+                    <option value="question">Question</option>
+                    <option value="remarque">Remarque</option>
+                    <option value="demande">Demande</option>
+                    <option value="autre">Autre</option>
+                </select> 
+            </div>
+        </div>
+        <div>
+            <div class="form-group">
+                <label for="comment">Message:</label>
+                <textarea class="form-control" rows="10" name="comment"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Envoyer</button> 
+        </div>
+    </form>
+</section>

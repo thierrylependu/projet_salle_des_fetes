@@ -1,0 +1,65 @@
+<?php $mail = getMail() ?>
+<h2><?= $mail ?> Messages non lus</h2>
+
+<section>
+    <form action="messages.php#navbar" method="POST">
+        <input type="submit" name="submit" value="Supprimer" class="btn btn-secondary">
+        <input type="submit" name="submit" value="Marquer comme non lu" class="btn btn-secondary">
+        <input type="submit" name="submit" value="Marquer comme lu" class="btn btn-secondary">
+
+        <div class="table-msg">
+            <table class="table">
+                <thead>
+                    <tr class="table-light">
+                        <th>Auteur</th>
+                        <th>Type</th>
+                        <th>Date</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach($messages as $message){ 
+                        $link = $message["id"];
+                        $color = getTypeColor($message["type"]) ?>
+                        <tr onclick="document.location = 'message_select.php?id=<?= $link ?>#navbar'" class="table table-hover <?= $color ?><?php if($message['status'] === 'Non lu'){ ?> unread<?php } ?>">
+                            <td>
+                                <?= $message["name"] ?>
+                            </td>
+                            <td>
+                                <?= $message["type"] ?>
+                            </td>
+                            <td>
+                                <?= $message["date"] ?>
+                            </td>
+                            <td>
+                                <?= $message["status"] ?>
+                            </td>
+                        </tr>
+                    <?php } ?>
+                </tbody>
+            </table>
+
+            <table class="table table-select">
+                <thead>
+                    <tr class="table-light">
+                        <th>
+                            <label for="checkAll" id="labelCheckAll"><i class="fas fa-check-square"></i></label>
+                            <input type="checkbox" class="check hidden" id="checkAll">
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach($messages as $message){ 
+                        $link = $message["id"];
+                        $color = getTypeColor($message["type"]) ?>
+                        <tr class="table table-hover <?= $color ?><?php if($message['status'] === 'Non lu'){ ?> unread<?php } ?>">
+                            <td>
+                                <input type="checkbox" name="selectMsg[]" value="<?= $message['id'] ?>" class="check">
+                            </td>
+                        </tr>
+                    <?php } ?>
+                </tbody>
+            </table>
+        </div>
+    </form>
+</section>

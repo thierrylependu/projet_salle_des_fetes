@@ -1,0 +1,79 @@
+<h2><i class="far fa-calendar-check"></i> Réserver la salle</h2>
+
+<?php if($done){ ?>
+    <div class="alert alert-success alert-dismissible fade show">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        Réservation éfféctuée !
+    </div>
+<?php } ?>
+
+<?php if($full){ ?>
+    <div class="alert alert-danger alert-dismissible fade show">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        Le créneau demandé est déjà réservé.
+    </div>
+<?php } ?>
+
+<small>Les champs marqués d'une * doivent être remplis pour l'enregistrement.</small>
+<br>
+<br>
+
+<form action="reserver.php#navbar" method="POST" class="register-form">
+
+<div class="input-group mb-3">
+    <div class="input-group-prepend">
+      <span class="input-group-text">Client</span>
+    </div>
+    <input type="text" class="form-control" name="lastName" placeholder="Nom*" value="<?= $account['lastName'] ?>" required>
+    <input type="text" class="form-control" placeholder="Adresse email*" name="email" value="<?= $account['email'] ?>" required>
+    <input type="text" class="form-control" placeholder="Télèphone" name="phone" value="<?= $account['phoneNumber'] ?>">
+  </div>
+  <div class="input-group mb-3">
+    <div class="input-group-prepend">
+      <span class="input-group-text">Date</span>
+    </div>
+    <input type="date" class="form-control" name="day" placeholder="Date" required>
+    <select name="hour" class="form-control">
+        <option value="matin">Matin</option>
+        <option value="apres-midi">Après-midi</option>
+        <option value="soir">Soir</option>
+        <option value="jour">Journée entière</option>
+    </select>
+  </div>
+  
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#registerRes">Enregistrer</button>
+
+    <div class="modal fade" id="registerRes">
+    <div class="modal-dialog">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Confirmer la réservation</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+        Vous pouvez choisir de payer 70€ maintenant par PayPal pour que votre réservation soit confirmée.
+        <br>
+        Sinon, un chéque de 70€ devra être envoyé à la mairie du Plessis Robinson afin de confirmer la réservation.
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <input type="submit" class="btn btn-success" value="Payer plus tard">
+        <input type="submit" class="btn btn-primary" value="Payer maintenant" disabled>
+      </div>
+
+    </div>
+  </div>
+</div>
+</form>
+
+<!-- <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+<input type="hidden" name="cmd" value="_s-xclick">
+<input type="hidden" name="hosted_button_id" value="NCZ9G4XS3J3HG">
+<input type="image" src="https://www.paypalobjects.com/fr_FR/FR/i/btn/btn_buynowCC_LG.gif" border="0" name="submit" alt="PayPal, le réflexe sécurité pour payer en ligne">
+<img alt="" border="0" src="https://www.paypalobjects.com/fr_FR/i/scr/pixel.gif" width="1" height="1">
+</form> -->

@@ -1,0 +1,88 @@
+<h2><i class="fas fa-cogs"></i> Paramétres du compte</h2>
+
+<form action="compte.php#navbar" method="POST" class="register-form">
+
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+            <span class="input-group-text">Identité</span>
+        </div>
+        <input type="text" class="form-control" placeholder="Nom*" name="lastName" required value="<?= $account['lastName'] ?>">
+        <input type="text" class="form-control" placeholder="Prénom" name="firstName" value="<?= $account['firstName'] ?>">
+        <input type="date" class="form-control" placeholder="Date de naissance" name="birthday" required value="<?= $account['birthDate'] ?>">
+    </div>
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+            <span class="input-group-text">Contact</span>
+        </div>
+        <input type="email" class="form-control" placeholder="Adresse email*" name="mailAdress" required value="<?= $account['email'] ?>">
+        <input type="text" class="form-control" placeholder="Téléphone" name="phone" value="<?= $account['phoneNumber'] ?>">
+        <input type="text" class="form-control" placeholder="Portable" name="mobile" value="<?= $account['mobileNumber'] ?>">
+    </div>
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+            <span class="input-group-text">Adresse</span>
+        </div>
+        <input type="text" class="form-control" placeholder="Adresse" name="address" value="<?= $account['address'] ?>">
+        <input type="text" class="form-control" placeholder="Ville" name="city" value="<?= $account['city'] ?>">
+        <input type="text" class="form-control" placeholder="Pays" name="country" value="Françe" value="<?= $account['country'] ?>">
+    </div>
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+            <span class="input-group-text">Identifiants</span>
+        </div>
+        <input type="text" class="form-control" placeholder="Pseudonyme*" name="userName" required value="<?= $account['userName'] ?>">
+        <input type="password" class="form-control" placeholder="Mot de passe*" name="password">
+        <select name="type" class="form-control">
+            <?php if($account["type"] == "Particulier"){ ?>
+                <option value="particulier" selected>Particulier</option>
+            <?php } else { ?>
+                <option value="particulier">Particulier</option>
+            <?php } ?>
+            <?php if($account["type"] == "entreprise"){ ?>
+                <option value="entreprise" selected>Entreprise</option>
+            <?php }else{ ?>
+                <option value="entreprise">Entreprise</option>
+            <?php } ?>
+            <?php if($account["type"] == "association"){ ?>
+                <option value="association" selected>Association</option>
+            <?php }else{ ?>
+                <option value="association">Association</option>
+            <?php } ?>
+            <?php if($account["type"] == "autre"){ ?>
+                <option value="autre" selected>Autre</option>
+            <?php }else{ ?>
+                <option value="autre">Autre</option>
+            <?php } ?>
+        </select>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Modifier</button>
+</form>
+
+<?php if($_SESSION["role"] === "guest"){ ?>
+<br>
+<br>
+<hr>
+    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteAccount">Supprimer le compte</button>
+<?php } ?>
+
+<div class="modal fade" id="deleteAccount">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+          
+          <!-- Modal body -->
+        <div class="modal-body">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <br>
+            Voulez vous supprimer votre compte ?
+            Cette action est définitive.
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" onclick="document.location = 'delete_account.php'">Supprimer</button>
+      </div>
+
+    </div>
+  </div>
+</div>

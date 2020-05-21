@@ -1,0 +1,64 @@
+<div class="slider">
+  <div><img src="img/exterieur.jpg" alt="Exterieur"></div>
+  <div><img src="img/salle_vide.jpg" alt="Salle vide"></div>
+  <div><img src="img/salle_marriage.jpg" alt="Salle pendant marriage"></div>
+  <div><img src="img/bar.jpg" alt="B"></div>ar
+</div>
+
+<div class="presentation">
+    <section class="modal fade" <?php if(!empty($_GET)){ if($_GET["register"] === "success"){ ?>id="registered"<?php }} ?>>
+            <div class="modal-dialog modal-lg modal-dialog-centered">
+                <div class="modal-content text-center">
+
+                    <!-- Modal body -->
+                    <div class="modal-body">
+                        <h2>Le compte a bien été crée.</h2>
+                        <button type="button" class="btn btn-success" data-dismiss="modal">Fermer</button>
+                    </div>
+
+                </div>
+            </div>
+    </section>
+
+
+
+    <section>
+        <h2>La salle</h2>
+        <img src="img/logo.jpg" alt="Logo du Plessis Robinson">
+        <article>
+            <p>La mairie du Plessis Robinson met une salle à votre disposition. Vous pouvez la réserver sur ce site grâce à un formulaire en ligne. En vous inscrivant sur le site, vos réservations seront plus simple à éffectuer. Vous aurez aussi la possibilité de garder un historique de vos réservations, ainsi que de nous laisser un avis dans notre livre d'or.</p>
+        </article>
+    </section>
+
+    <section class="equip">
+        <h2>L'équipement</h2>
+        <article>
+            <img src="img/parking.jpg" alt="Parking">
+            <p>Un parking est à votre disposition à l'extérieur de la salle.</p>
+        </article>  
+        <hr>
+        <article>
+                <img src="img/cuisine.jpg" alt="Cuisine">
+            <p>La salle posséde une cuisine comprenant un réfrigirateur, un four, une gazinière. La cuisine est aussi équipée de poeles et de casseroles.</p>
+        </article>
+        <hr>
+        <article>
+            <img src="img/petite_salle.jpg" alt="Petite salle">
+            <p>Une petite salle se trouve au fond du batiment afin de pouvoir ranger vos affaires.</p>
+        </article>
+    </section>
+
+    <aside class="evt">
+        <h3>Évenements dans la salle</h3>
+        <?php foreach($events as $evt){ ?>
+            <article>
+                <h4><?= $evt["name"] ?></h4>
+                <p><?= $evt["comment"] ?></p>
+                <small>Le <?= $evt["date"] ?>,<?php if($evt["heure"] === "jour"){ ?> toute la journée.<?php }else{ ?>le <?= $evt["heure"] ?><?php } ?>
+                </small>
+            </article>
+        <?php } ?>
+    </aside>
+</div>
+
+<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2628.977234094832!2d2.2600361156716837!3d48.782324879280054!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e67a037d9fe9c9%3A0x7766cf67e3cf1e18!2s3%20Rue%20de%20la%20Mairie%2C%2092350%20Le%20Plessis-Robinson!5e0!3m2!1sfr!2sfr!4v1583416362199!5m2!1sfr!2sfr" width="100%" height="200" frameborder="0" style="border:0;" allowfullscreen=""></iframe>

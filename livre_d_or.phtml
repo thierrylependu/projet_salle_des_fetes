@@ -1,0 +1,63 @@
+<button data-toggle="collapse" data-target="#avis" id="toggle-avis" class="btn btn-info">Laissez votre avis</button>
+
+<section id="avis" class="collapse">
+    <?php if (array_key_exists("role", $_SESSION)) { ?>
+
+        <h2>Avis</h2>
+
+        <div>
+            <i class="fas fa-star" id="star1"></i>
+            <i class="fas fa-star" id="star2"></i>
+            <i class="fas fa-star" id="star3"></i>
+            <i class="fas fa-star" id="star4"></i>
+            <i class="fas fa-star" id="star5"></i>
+        </div>
+
+        <form action="register_review.php" method="POST">
+            <div class="hidden">
+                <input type="radio" name="mark" value="1" checked="checked">
+                <input type="radio" name="mark" value="2">
+                <input type="radio" name="mark" value="3">
+                <input type="radio" name="mark" value="4">
+                <input type="radio" name="mark" value="5">
+            </div>
+            <div class="form-group">
+                <label for="review">Commentaire:</label>
+                <textarea class="form-control" rows="5" name="review">Insérez votre commentaire ici</textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Envoyer</button> 
+        </form>
+    <?php }else{ ?>
+        <div class="alert alert-warning">
+            <strong>Attention!</strong> Il faut être connécté pour pouvoir laisser un avis.
+        </div>
+    <?php } ?>
+</section> 
+
+
+<section class="list-reviews">
+    <?php foreach($reviews as $review){
+        $auth = getAuthor($review["userId"]);
+        ?>
+        <article class="review rounded-lg">
+            <h3><?= $auth ?>, le <?= $review["date"] ?></h3>
+            <div class="rating">
+                <p><?= $review["message"] ?></p>
+                <div>
+                    <i class="fas fa-star <?php if($review["mark"]>= 1){ ?> star-selected <?php } ?>"></i>
+                    <i class="fas fa-star <?php if($review["mark"]>= 2){ ?> star-selected <?php } ?>"></i>
+                    <i class="fas fa-star <?php if($review["mark"]>= 3){ ?> star-selected <?php } ?>"></i>
+                    <i class="fas fa-star <?php if($review["mark"]>= 4){ ?> star-selected <?php } ?>"></i>
+                    <i class="fas fa-star <?php if($review["mark"]>= 5){ ?> star-selected <?php } ?>"></i>
+                </div>
+            </div>  
+            <?php if (array_key_exists("role", $_SESSION)) { 
+                if($_SESSION["role"] === "admin"){ ?>
+                <form action="delete_review.php" method="POST">
+                    <input type="text" name="id" class="hidden" value="<?= $review['id'] ?>">
+                    <button type="submit" class="btn btn-danger"><i class="fas fa-times-circle"></i></button>
+                </form>
+            <?php } }?>
+        </article>
+    <?php } ?>
+</section>
